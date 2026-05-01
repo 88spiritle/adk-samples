@@ -16,6 +16,9 @@ classifiers = [
   "Programming Language :: Python :: 3 :: Only",
 ]
 
+[tool.uv]
+index-url = "https://pypi.org/simple"
+
 dependencies = [
     "swebench @ git+https://github.com/swe-bench/swe-bench.git@v4.1.0#egg=swebench",
     "typer>=0.19.2",

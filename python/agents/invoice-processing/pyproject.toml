@@ -38,6 +38,9 @@ dev = [
 [tool.agent_packs]
 template = "adk"
 
+[tool.uv]
+index-url = "https://pypi.org/simple"
+
 [tool.agent-starter-pack]
 example_question = "Process the invoice for case_001."
 

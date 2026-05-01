@@ -47,6 +47,8 @@ dev = [
 extend = "../../../pyproject.toml"
 target-version = "py311"
 
+[tool.uv]
+index-url = "https://pypi.org/simple"
 
 [tool.ruff.lint]
 select = [
