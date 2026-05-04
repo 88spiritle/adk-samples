@@ -1,5 +1,5 @@
 version = 1
-revision = 2
+revision = 3
 requires-python = ">=3.11, <3.13"
 resolution-markers = [
     "python_full_version >= '3.12'",
@@ -162,7 +162,7 @@ wheels = [
 
 [[package]]
 name = "arize"
-version = "8.22.0"
+version = "8.22.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "numpy" },
@@ -183,9 +183,9 @@ dependencies = [
     { name = "urllib3" },
     { name = "wrapt" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/89/41/22940271939a779576ed889cae952e270d00d12a223f080628e5e864a1c4/arize-8.22.0.tar.gz", hash = "sha256:025299da1a8aacf2ffd872fc2f83339454593cd0b379f2ddf4a9b66d53f4904a", size = 400819, upload-time = "2026-04-29T21:01:31.899Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/52/f1/b0f8a518411473e5217acaaf95f591a7fb8999104b4d34f77841b93743f3/arize-8.22.1.tar.gz", hash = "sha256:fe9ef624e6cfd1958815cd5199381408a40117f0305cec259606bc57921c35ea", size = 401806, upload-time = "2026-05-01T00:51:28.143Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/5d/90/f53021408fce07f8541674f9c47de911b619ce203662307b14c1d0af580f/arize-8.22.0-py3-none-any.whl", hash = "sha256:716148cd9652c9c6b21213fff28b8300e8c6e20d6582fbe948c2a383def99d2a", size = 860826, upload-time = "2026-04-29T21:01:29.781Z" },
+    { url = "https://files.pythonhosted.org/packages/e5/5c/91d178176e49e8b14f672b6dbc2706320ac99c1f71f61ac57c7ae28553df/arize-8.22.1-py3-none-any.whl", hash = "sha256:940adfff7834f768b8dab59c7005e66b128e9424c503c28066acf8baf38b22ee", size = 865861, upload-time = "2026-05-01T00:51:25.682Z" },
 ]
 
 [[package]]
@@ -684,7 +684,7 @@ wheels = [
 
 [[package]]
 name = "google-adk"
-version = "1.31.1"
+version = "1.32.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aiosqlite" },
@@ -733,9 +733,9 @@ dependencies = [
     { name = "watchdog" },
     { name = "websockets" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/9b/f7/e2371e8a871202f47f8911992da7daf8623dd61e714e0af5c6fec019ba67/google_adk-1.31.1.tar.gz", hash = "sha256:e56416264f62e931709da6262bc9fe05140faeb7a889a2fe8f5684617e8a05c3", size = 2408228, upload-time = "2026-04-21T02:06:48.623Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/0a/cb/6c5ad3f7135071ed6465494acb88084b071c750e2215a55c842649f353e4/google_adk-1.32.0.tar.gz", hash = "sha256:539df330a695d8ae5dc1bc3f1155ef03c6c620620cd0b690b8d47865e722e51c", size = 2424585, upload-time = "2026-05-01T00:20:47.888Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/c8/02/6e7b88b122708569004ac024ec7f6773cc9d10ce1b086a4a6668a95ca142/google_adk-1.31.1-py3-none-any.whl", hash = "sha256:8f5d9c67c9a87832c2fe581bd4b1248dddf8964c98351a38e2663f0999bc7209", size = 2850553, upload-time = "2026-04-21T02:06:45.992Z" },
+    { url = "https://files.pythonhosted.org/packages/03/68/c02dee93b09c0af4cc68a6a4fdb330a8e4935ffa9c8ad9640590ca29cca4/google_adk-1.32.0-py3-none-any.whl", hash = "sha256:cee8e8bd1d869f7e01ba3e5aac44b255f70ee3f9bb78cb50b3253ce605703b0d", size = 2869333, upload-time = "2026-05-01T00:20:49.851Z" },
 ]
 
 [package.optional-dependencies]
@@ -2858,12 +2858,12 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "arize", specifier = ">=7.36.0" },
+    { name = "arize", specifier = ">=8.22.1" },
     { name = "arize-otel", specifier = ">=0.8.2" },
     { name = "codespell", marker = "extra == 'lint'", specifier = ">=2.2.0" },
-    { name = "google-adk", extras = ["eval"], specifier = ">=1.31.0" },
+    { name = "google-adk", extras = ["eval"], specifier = ">=1.32.0" },
     { name = "google-auth", specifier = ">=2.36.0" },
-    { name = "google-cloud-aiplatform", extras = ["adk", "agent-engines"], specifier = ">=1.108.0" },
+    { name = "google-cloud-aiplatform", extras = ["adk", "agent-engines"], specifier = ">=1.149.0" },
     { name = "llama-index", specifier = ">=0.12" },
     { name = "mypy", marker = "extra == 'lint'", specifier = ">=1.15.0" },
     { name = "openinference-instrumentation", specifier = ">=0.1.34" },
@@ -2873,7 +2873,7 @@ requires-dist = [
     { name = "ruff", marker = "extra == 'lint'", specifier = ">=0.4.6" },
     { name = "tabulate", specifier = ">=0.9.0" },
     { name = "types-pyyaml", marker = "extra == 'lint'", specifier = ">=6.0.12.20240917" },
-    { name = "types-requests", marker = "extra == 'lint'", specifier = ">=2.32.0.20240914" },
+    { name = "types-requests", marker = "extra == 'lint'", specifier = ">=2.33.0.20260503" },
 ]
 provides-extras = ["lint"]
 
@@ -3413,14 +3413,14 @@ wheels = [
 
 [[package]]
 name = "types-requests"
-version = "2.33.0.20260408"
+version = "2.33.0.20260503"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "urllib3" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/69/6a/749dc53a54a3f35842c1f8197b3ca6b54af6d7458a1bfc75f6629b6da666/types_requests-2.33.0.20260408.tar.gz", hash = "sha256:95b9a86376807a216b2fb412b47617b202091c3ea7c078f47cc358d5528ccb7b", size = 23882, upload-time = "2026-04-08T04:34:49.33Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/a1/b8/57e94268c0d82ac3eaa2fc35aa8ca7bbc2542f726b67dcf90b0b00a3b14d/types_requests-2.33.0.20260503.tar.gz", hash = "sha256:9721b2d9dbee7131f2fb39f20f0ebb1999c18cef4b512c9a7932f3722de7c5f4", size = 23931, upload-time = "2026-05-03T05:20:08.882Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/90/b8/78fd6c037de4788c040fdd323b3369804400351b7827473920f6c1d03c10/types_requests-2.33.0.20260408-py3-none-any.whl", hash = "sha256:81f31d5ea4acb39f03be7bc8bed569ba6d5a9c5d97e89f45ac43d819b68ca50f", size = 20739, upload-time = "2026-04-08T04:34:48.325Z" },
+    { url = "https://files.pythonhosted.org/packages/c3/82/959113a6351f3ca046cd0a8cd2cee071d7ea47473560557a01eeae9a6fe2/types_requests-2.33.0.20260503-py3-none-any.whl", hash = "sha256:02aaa7e3577a13471715bb1bddb693cc985ea514f754b503bf033e6a09a3e528", size = 20736, upload-time = "2026-05-03T05:20:07.858Z" },
 ]
 
 [[package]]
