@@ -1,6 +1,6 @@
 absolufy-imports==0.3.1
 aiohappyeyeballs==2.6.1
-aiohttp==3.12.15
+aiohttp==3.13.4
 aiosignal==1.4.0
 alembic==1.16.5
 annotated-types==0.7.0
@@ -120,7 +120,7 @@ pytest-asyncio==1.1.0
 pytest-mock==3.14.1
 python-dateutil==2.9.0.post0
 python-dotenv==1.1.1
-python-multipart==0.0.20
+python-multipart==0.0.27
 PyYAML==6.0.2
 referencing==0.36.2
 requests==2.32.5
