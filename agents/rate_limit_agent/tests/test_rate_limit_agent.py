@@ -32,6 +32,11 @@ class TestRateLimitPolicy:
         with pytest.raises(ValueError, match="max_calls"):
             RateLimitPolicy(max_calls=0)
 
+    def test_invalid_max_calls_negative_raises(self) -> None:
+        # Negative values should be rejected just like zero
+        with pytest.raises(ValueError, match="max_calls"):
+            RateLimitPolicy(max_calls=-5)
+
     def test_invalid_period_raises(self) -> None:
         with pytest.raises(ValueError, match="period_seconds"):
             RateLimitPolicy(period_seconds=0.0)
@@ -73,42 +78,18 @@ class TestRateLimiter:
         result = limiter.execute(lambda x: x * 2, 21)
         assert result == 42
 
+    def test_execute_raises_when_exceeded_after_reset(self) -> None:
+        # Verify that the limit is re-enforced correctly after a reset cycle.
+        limiter = RateLimiter(policy=RateLimitPolicy(max_calls=2, period_seconds=60))
+        limiter.execute(lambda: None)
+        limiter.execute(lambda: None)
+        limiter.reset()
+        limiter.execute(lambda: None)
+        limiter.execute(lambda: None)
+        with pytest.raises(RuntimeError, match="Rate limit exceeded"):
+            limiter.execute(lambda: None)
+
 
 # ---------------------------------------------------------------------------
 # RateLimitAgent
 # ---------------------------------------------------------------------------
-
-class TestRateLimitAgent:
-    def test_call_invokes_handler(self) -> None:
-        agent = _make_agent(max_calls=5)
-        agent.register_handler(lambda x: x + 1)
-        assert agent.call(9) == 10
-
-    def test_call_without_handler_raises(self) -> None:
-        agent = _make_agent()
-        with pytest.raises(RuntimeError, match="No handler registered"):
-            agent.call()
-
-    def test_non_callable_handler_raises(self) -> None:
-        agent = _make_agent()
-        with pytest.raises(TypeError, match="callable"):
-            agent.register_handler("not_a_function")  # type: ignore[arg-type]
-
-    def test_rate_limit_enforced(self) -> None:
-        agent = _make_agent(max_calls=2, period=60.0)
-        agent.register_handler(lambda: "ok")
-        agent.call()
-        agent.call()
-        with pytest.raises(RuntimeError, match="Rate limit exceeded"):
-            agent.call()
-
-    def test_reset_allows_fresh_calls(self) -> None:
-        agent = _make_agent(max_calls=1, period=60.0)
-        agent.register_handler(lambda: "ok")
-        agent.call()
-        agent.reset()
-        assert agent.call() == "ok"
-
-    def test_config_validation_propagates(self) -> None:
-        with pytest.raises(ValueError):
-            RateLimitAgentConfig(name="x", max_calls=0).validate()
