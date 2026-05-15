@@ -12,7 +12,9 @@ from agents.event_agent.events import Event, EventBus, Handler
 class EventAgentConfig(AgentConfig):
     """Configuration for EventAgent."""
 
-    max_subscriptions: int = 50
+    # Increased default from 50 to 100 to better support real-world use cases
+    # where a single agent may need to handle many event topics simultaneously.
+    max_subscriptions: int = 100
 
     def validate(self) -> None:  # type: ignore[override]
         super().validate()
