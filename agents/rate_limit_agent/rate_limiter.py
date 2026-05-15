@@ -9,9 +9,13 @@ from typing import Callable, Any
 
 @dataclass
 class RateLimitPolicy:
-    """Configuration for a token-bucket rate limiter."""
+    """Configuration for a token-bucket rate limiter.
 
-    max_calls: int = 10
+    Defaults are set conservatively (5 calls/sec) to avoid accidental
+    upstream throttling during development.
+    """
+
+    max_calls: int = 5
     period_seconds: float = 1.0
 
     def __post_init__(self) -> None:
@@ -44,6 +48,12 @@ class RateLimiter:
     def reset(self) -> None:
         """Clear all recorded call timestamps."""
         self._timestamps.clear()
+
+    def remaining(self) -> int:
+        """Return how many calls are still allowed in the current window."""
+        now = time.monotonic()
+        self._evict_old(now)
+        return max(0, self.policy.max_calls - len(self._timestamps))
 
     def execute(self, fn: Callable[..., Any], *args: Any, **kwargs: Any) -> Any:
         """Execute *fn* if the rate limit allows; raise RuntimeError otherwise."""
