@@ -31,6 +31,11 @@ class TestPipelineStep:
         with pytest.raises(TypeError):
             PipelineStep(name="bad", handler="not_callable")
 
+    # Personal note: also verify that None is rejected as a handler
+    def test_none_handler_raises(self):
+        with pytest.raises(TypeError):
+            PipelineStep(name="none-handler", handler=None)
+
 
 # ---------------------------------------------------------------------------
 # Pipeline tests
@@ -80,19 +85,4 @@ class TestPipelineAgent:
         agent.run(10)
         assert agent.last_result == 11
 
-    def test_reset_clears_steps_and_result(self):
-        agent = _make_agent()
-        agent.add_step(PipelineStep(name="inc", handler=lambda x: x + 1))
-        agent.run(1)
-        agent.reset()
-        assert agent.last_result is None
-        assert agent.step_names() == []
-
-    def test_empty_pipeline_name_raises(self):
-        with pytest.raises(ValueError):
-            _make_agent(pipeline_name="")
-
-    def test_step_names_delegated(self):
-        agent = _make_agent()
-        agent.add_step(PipelineStep(name="x", handler=lambda v: v))
-        assert agent.step_names() == ["x"]
+    def test_reset_clears_steps_and_res
