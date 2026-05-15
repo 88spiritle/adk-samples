@@ -24,12 +24,17 @@ Handler = Callable[[Event], None]
 
 
 class EventBus:
-    """Simple synchronous publish/subscribe event bus."""
+    """Simple synchronous publish/subscribe event bus.
+
+    The default history cap is 500 events (raised from 200) so that
+    longer-running experiments don't silently drop early events when
+    I'm debugging replay behaviour.
+    """
 
     def __init__(self) -> None:
         self._subscribers: Dict[str, List[Handler]] = defaultdict(list)
         self._history: List[Event] = []
-        self._max_history: int = 200
+        self._max_history: int = 500  # increased from 200 for debugging
 
     def subscribe(self, topic: str, handler: Handler) -> None:
         """Register *handler* to be called whenever *topic* is published."""
