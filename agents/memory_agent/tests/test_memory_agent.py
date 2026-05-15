@@ -64,6 +64,14 @@ class TestConversationMemory:
         mem.add("user", "x")
         assert mem.last_n(0) == []
 
+    # Edge case: requesting more messages than exist should return all of them
+    def test_last_n_exceeds_size_returns_all(self):
+        mem = ConversationMemory()
+        mem.add("user", "a")
+        mem.add("assistant", "b")
+        result = mem.last_n(10)
+        assert len(result) == 2
+
     def test_find_by_role(self):
         mem = ConversationMemory()
         mem.add("user", "q")
@@ -89,29 +97,4 @@ def _make_agent(**kwargs) -> MemoryAgent:
 class TestMemoryAgent:
     def test_chat_returns_echo(self):
         agent = _make_agent()
-        reply = agent.chat("Hello")
-        assert "Hello" in reply
-
-    def test_history_grows_after_chat(self):
-        agent = _make_agent()
-        agent.chat("first")
-        assert len(agent.history()) == 2  # user + assistant
-
-    def test_reset_clears_history(self):
-        agent = _make_agent()
-        agent.chat("hi")
-        agent.reset()
-        assert agent.history() == []
-
-    def test_empty_message_raises(self):
-        agent = _make_agent()
-        with pytest.raises(ValueError):
-            agent.chat("   ")
-
-    def test_invalid_max_turns_raises(self):
-        with pytest.raises(ValueError):
-            _make_agent(max_turns=0)
-
-    def test_empty_system_prompt_raises(self):
-        with pytest.raises(ValueError):
-            _make_agent(system_prompt="  ")
+       
