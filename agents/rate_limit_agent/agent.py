@@ -11,10 +11,15 @@ from agents.rate_limit_agent.rate_limiter import RateLimitPolicy, RateLimiter
 
 @dataclass
 class RateLimitAgentConfig(AgentConfig):
-    """Configuration specific to the RateLimitAgent."""
+    """Configuration specific to the RateLimitAgent.
 
-    max_calls: int = 10
-    period_seconds: float = 1.0
+    Defaults allow 10 calls per second, which is conservative enough for most
+    external API integrations. Increase max_calls or period_seconds as needed.
+    """
+
+    # Raised from 10 to 60 to better suit typical per-minute API quotas.
+    max_calls: int = 60
+    period_seconds: float = 60.0
 
     def validate(self) -> None:  # type: ignore[override]
         super().validate()
