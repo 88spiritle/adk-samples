@@ -83,18 +83,18 @@ class TestConversationMemory:
         with pytest.raises(ValueError):
             ConversationMemory(max_turns=0)
 
+    # Personal note: also verify that max_turns=1 is accepted as the minimum
+    # valid value (boundary check that the original tests missed).
+    def test_min_valid_max_turns(self):
+        mem = ConversationMemory(max_turns=1)
+        mem.add("user", "only one turn allowed")
+        mem.add("assistant", "response")
+        # max_turns=1 => at most 2 raw messages kept
+        assert mem.size == 2
+
 
 # ---------------------------------------------------------------------------
 # MemoryAgent tests
 # ---------------------------------------------------------------------------
 
-def _make_agent(**kwargs) -> MemoryAgent:
-    defaults = {"name": "test-agent", "model": "gemini-pro", "max_turns": 5}
-    defaults.update(kwargs)
-    return MemoryAgent(MemoryAgentConfig(**defaults))
-
-
-class TestMemoryAgent:
-    def test_chat_returns_echo(self):
-        agent = _make_agent()
-       
+def _ma
